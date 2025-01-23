@@ -1,16 +1,16 @@
-name: CI to Docker Hub
+name: Docker build
 
 on:
   push:
     tags: ['*']
-    branches: [ 'master', 'stable-*' ]
+    branches: [ 'main', 'stable-*' ]
   pull_request:
-    branches: [ 'master', 'stable-*' ]
+    branches: [ 'main', 'stable-*' ]
 
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -18,8 +18,8 @@ jobs:
       - name: Test image # Checks we are able to run the container.
         run: docker compose -f docker-compose.test.yml run sut
 
-  build:
-    runs-on: ubuntu-latest
+  build_upload:
+    runs-on: ubuntu-22.04
     needs: test
     if: github.event_name != 'pull_request'
     steps:

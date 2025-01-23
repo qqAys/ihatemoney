@@ -84,7 +84,6 @@ def flash_email_error(error_message, category="danger"):
 
 
 class Redirect303(HTTPException, RoutingException):
-
     """Raise if the map requests a redirect. This is for example the case if
     `strict_slashes` are activated and an url that requires a trailing slash.
 
@@ -102,7 +101,6 @@ class Redirect303(HTTPException, RoutingException):
 
 
 class PrefixedWSGI(object):
-
     """
     Wrap the application in this middleware and configure the
     front-end server to add these headers, to let you quietly bind
@@ -221,6 +219,7 @@ def csv2list_of_dicts(csv_to_convert):
         r["amount"] = float(r["amount"])
         r["payer_weight"] = float(r["payer_weight"])
         r["owers"] = [o.strip() for o in r["owers"].split(",")]
+        r["bill_type"] = str(r["bill_type"])
         result.append(r)
     return result
 
@@ -304,7 +303,16 @@ def get_members(file):
 
 
 def same_bill(bill1, bill2):
-    attr = ["what", "payer_name", "payer_weight", "amount", "currency", "date", "owers"]
+    attr = [
+        "what",
+        "bill_type",
+        "payer_name",
+        "payer_weight",
+        "amount",
+        "currency",
+        "date",
+        "owers",
+    ]
     for a in attr:
         if bill1[a] != bill2[a]:
             return False
@@ -444,7 +452,9 @@ def format_form_errors(form, prefix):
         )
     else:
         error_list = "</li><li>".join(
-            str(error) for (field, errors) in form.errors.items() for error in errors
+            f"<strong>{field}</strong> {error}"
+            for (field, errors) in form.errors.items()
+            for error in errors
         )
         errors = f"<ul><li>{error_list}</li></ul>"
         # I18N: Form error with a list of errors

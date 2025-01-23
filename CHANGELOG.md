@@ -4,8 +4,27 @@ This document describes changes between each past release.
 
 ## 6.2.0 (unreleased)
 
-
 - Add support for python 3.12 (#757)
+- Migrate from setup.cfg to pyproject.toml (#1243)
+- Update to wtforms 3.1 (#1248)
+- Document [repository rules](https://ihatemoney.readthedocs.io/en/latest/contributing.html#repository-rules) (#1253)
+- Add "reimbursement" bills and allow to create them directly from the "Settle" page (#1290)
+- Remove support for python 3.7
+- Replace the black linter by ruff
+- Replace virtualenv and pip by uv
+- Remove tox
+
+## 6.1.5 (2024-03-19)
+
+- Fix README and changelog not being displayed on PyPI
+- Fix ability to change project settings when project has existing currency (#1292)
+- Update translations for Dutch and German
+
+
+## 6.1.4 (2023-12-14)
+
+- Fix missing markdown include in manifest (#1274)
+- Update translations for Chinese, Turkish, Czech, Spanish (Latin America), Swedish
 
 
 ## 6.1.3 (2023-11-23)
