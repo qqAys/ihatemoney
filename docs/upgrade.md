@@ -1,6 +1,6 @@
 # Upgrading
 
-We keep [a ChangeLog](https://github.com/spiral-project/ihatemoney/blob/master/CHANGELOG.md),
+We keep [a ChangeLog](https://github.com/spiral-project/ihatemoney/blob/main/CHANGELOG.md),
 please read it before upgrading.
 
 Ihatemoney follows [semantic versioning](http://semver.org/). So minor/patch
@@ -19,7 +19,7 @@ upgrades can be applied blindly.
 
 You may also want to set new configuration variables (if any). They are
 mentioned in the
-[ChangeLog](https://github.com/spiral-project/ihatemoney/blob/master/CHANGELOG.md),
+[ChangeLog](https://github.com/spiral-project/ihatemoney/blob/main/CHANGELOG.md),
 but this is **not required for minor/patch upgrades**, a safe default
 will be used automatically.
 
@@ -29,6 +29,20 @@ will be used automatically.
 
 When upgrading from a major version to another, you **must** follow
 special instructions:
+
+### 6.x → 7.x
+
+#### Switch to a supported version of Python
+
+::: {note}
+If you are using docker installation, you don't care about Python versions.
+:::
+
+If you were running IHateMoney using Python < 3.11, you must switch to 
+Python ≥ 3.11 to be able to upgrade IhateMoney to 6.X.
+
+Then, see bellow. The steps to upgrade the virtualenv are the same than 
+ **4.x → 5.x** upgrade (although Python versions differ).
 
 ### 4.x → 5.x
 

@@ -20,21 +20,21 @@ serve: build-translations ## Run the ihatemoney server
 	FLASK_DEBUG=1 FLASK_APP=ihatemoney.wsgi uv run flask run --host=0.0.0.0
 
 .PHONY: test
-test:
-	uv run --extra dev --extra database pytest .
+test: ## Run the test suite
+	uv run --extra dev --extra database pytest $(wordlist 2, 100, $(MAKECMDGOALS)) .
 
 .PHONY: lint
-lint:
+lint: ## Run the linter (check only)
 	uv tool run ruff check .
 	uv tool run vermin --no-tips --violations -t=3.8- .
 
 .PHONY: format
-format: 
+format:  ## Run the formatter
 	uv tool run ruff format .
 
 .PHONY: release
-release: # Release a new version (see https://ihatemoney.readthedocs.io/en/latest/contributing.html#how-to-release)
-		uv run --extra dev fullreleas
+release: ## Release a new version (see https://ihatemoney.readthedocs.io/en/latest/contributing.html#how-to-release)
+		uv run --extra dev fullrelease
 
 .PHONY: compress-showcase
 compress-showcase:
@@ -73,9 +73,13 @@ create-empty-database-revision: ## Create an empty database revision
 clean: ## Destroy the virtual environment
 	rm -rf .venv
 
-build-docs:
+build-docs: ## Build the documentation
 	uv run --extra doc sphinx-build -a -n -b html -d docs/_build/doctrees docs docs/_build/html
 
 .PHONY: help
 help: ## Show the help indications
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+# Used to ignore unknown targets
+%:
+	@true

@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-29 14:24+0200\n"
-"PO-Revision-Date: 2023-07-29 13:07+0000\n"
-"Last-Translator: Baptiste <weblate@bitsofnetworks.org>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/i-hate-money/"
-"i-hate-money/fr/>\n"
+"POT-Creation-Date: 2026-03-02 23:07+0100\n"
+"PO-Revision-Date: 2026-03-04 18:37+0000\n"
+"Last-Translator: JocelynDelalande <jocelyn@crapouillou.net>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/i-hate-money/i-"
+"hate-money/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
-"Generated-By: Babel 2.9.0\n"
+"X-Generator: Weblate 5.17-dev\n"
+"Generated-By: Babel 2.16.0\n"
 
 #, python-format
 msgid "You have just created '%(project)s' to share your expenses"
@@ -75,6 +75,11 @@ msgid ""
 msgstr ""
 "Ce projet ne peut pas être sans devise car il contient des factures "
 "utilisant des devises différentes."
+
+msgid "Cannot change project currency because currency conversion is broken"
+msgstr ""
+"Impossible de changer la devise du projet car la conversion de devise "
+"utilisée ne fonctionne plus"
 
 msgid "Compatible with Cospend"
 msgstr "Compatible avec Cospend"
@@ -156,6 +161,9 @@ msgstr "Un lien vers un document, lié à cette facture"
 msgid "For whom?"
 msgstr "Pour qui ?"
 
+msgid "Bill Type"
+msgstr "Type de dépense"
+
 msgid "Submit"
 msgstr "Valider"
 
@@ -165,6 +173,10 @@ msgstr "Valider et ajouter une autre facture"
 #, python-format
 msgid "Project default: %(currency)s"
 msgstr "Devise du projet : %(currency)s"
+
+#, python-format
+msgid "Failed to convert from %(bill_currency)s currency to %(project_currency)s"
+msgstr "Échec de la conversion de %(bill_currency)s en %(project_currency)s"
 
 msgid "Name"
 msgstr "Nom"
@@ -365,6 +377,15 @@ msgstr "La facture a été modifiée"
 msgid "%(lang)s is not a supported language"
 msgstr "La langue %(lang)s n'est pas prise en charge"
 
+msgid "Error creating settlement bill"
+msgstr "Erreur lors de la création du remboursement"
+
+msgid "Settlement"
+msgstr "Remboursement"
+
+msgid "Settlement bill has been successfully added"
+msgstr "Le remboursement a bien été ajouté"
+
 msgid "Error deleting project history"
 msgstr "Erreur lors de la suppression de l'historique du projet"
 
@@ -506,6 +527,9 @@ msgstr "Ajouter un⋅e participant⋅e"
 msgid "Edit this participant"
 msgstr "Modifier un⋅e participant⋅e"
 
+msgid "Save"
+msgstr "Enregistrer"
+
 msgid "john.doe@example.com, mary.moe@site.com"
 msgstr "marie@site.com, jean.dupont@exemple.com"
 
@@ -580,6 +604,27 @@ msgid "Bill %(name)s: removed %(owers_list_str)s from owers list"
 msgstr ""
 "Facture %(name)s : %(owers_list_str)s supprimé de la liste des "
 "débiteur⋅ices"
+
+msgid "Details of the bill (before the change)"
+msgstr "Détail de la facture (avant le changement)"
+
+msgid "Details of the bill"
+msgstr "Détails de la facture"
+
+msgid "Date:"
+msgstr "Date :"
+
+msgid "Payer:"
+msgstr "Qui a payé :"
+
+msgid "Amount:"
+msgstr "Montant :"
+
+msgid "Owers:"
+msgstr "Pour qui :"
+
+msgid "External link:"
+msgstr "Lien externe :"
 
 msgid "This project has history disabled. New actions won't appear below."
 msgstr ""
@@ -667,26 +712,8 @@ msgid "Project settings modified"
 msgstr "Les paramètres du projet ont été modifiés"
 
 #, python-format
-msgid "Participant %(name)s deactivated"
-msgstr "Participant⋅e %(name)s désactivé⋅e"
-
-#, python-format
-msgid "Participant %(name)s reactivated"
-msgstr "Participant⋅e %(name)s réactivé⋅e"
-
-#, python-format
-msgid "Participant %(name)s renamed to %(new_name)s"
-msgstr "Participant⋅e %(name)s renommé⋅e en %(new_name)s"
-
-#, python-format
 msgid "Bill %(name)s renamed to %(new_description)s"
 msgstr "Facture %(name)s renommée en %(new_description)s"
-
-#, python-format
-msgid "Participant %(name)s: weight changed from %(old_weight)s to %(new_weight)s"
-msgstr ""
-"Participant⋅e %(name)s : nombre de parts changé de %(old_weight)s en "
-"%(new_weight)s"
 
 msgid "Payer"
 msgstr "Payeur"
@@ -704,6 +731,24 @@ msgstr "Montant en %(currency)s"
 #, python-format
 msgid "Bill %(name)s modified"
 msgstr "Facture %(name)s modifiée"
+
+#, python-format
+msgid "Participant %(name)s deactivated"
+msgstr "Participant⋅e %(name)s désactivé⋅e"
+
+#, python-format
+msgid "Participant %(name)s reactivated"
+msgstr "Participant⋅e %(name)s réactivé⋅e"
+
+#, python-format
+msgid "Participant %(name)s renamed to %(new_name)s"
+msgstr "Participant⋅e %(name)s renommé⋅e en %(new_name)s"
+
+#, python-format
+msgid "Participant %(name)s: weight changed from %(old_weight)s to %(new_weight)s"
+msgstr ""
+"Participant⋅e %(name)s : nombre de parts changé de %(old_weight)s en "
+"%(new_weight)s"
 
 #, python-format
 msgid "Participant %(name)s modified"
@@ -935,9 +980,9 @@ msgid ""
 "to notify about the creation of this project. We will send them an email "
 "with the invitation link."
 msgstr ""
-"Entrez les emails des personnes avec qui vous souhaitez partager ce projet ("
-"en séparant les adresses emails avec des virgules). Nous leur enverrons un "
-"mail avec le lien d'invitation."
+"Entrez les emails des personnes avec qui vous souhaitez partager ce "
+"projet (en séparant les adresses emails avec des virgules). Nous leur "
+"enverrons un mail avec le lien d'invitation."
 
 msgid "Share Identifier & code"
 msgstr "Partager l'identifiant et le code"
@@ -969,6 +1014,16 @@ msgstr "Qui doit payer ?"
 msgid "To whom?"
 msgstr "Pour qui ?"
 
+msgid "Settled?"
+msgstr "Remboursement ?"
+
+msgid "Click here to record that the money transfer has been done"
+msgstr ""
+"Cliquez ici pour enregistrer le fait que le remboursement a été effectué"
+
+msgid "Register settlement"
+msgstr "Enregistrer le remboursement"
+
 msgid "Who?"
 msgstr "Qui ?"
 
@@ -984,10 +1039,16 @@ msgstr "réactiver"
 msgid "Paid"
 msgstr "A payé"
 
-msgid "Spent"
-msgstr "A dépensé"
+msgid "Expenses"
+msgstr "Dépenses"
 
-msgid "Expenses by Month"
+msgid "Direct transfer"
+msgstr "Remboursé"
+
+msgid "Received"
+msgstr "Reçu"
+
+msgid "Expenses by month"
 msgstr "Dépenses par mois"
 
 msgid "Period"
@@ -1388,3 +1449,6 @@ msgstr "Période"
 
 #~ msgid "You can directly share the following link via your prefered medium"
 #~ msgstr "Vous pouvez directement partager le lien suivant"
+
+#~ msgid "Spent"
+#~ msgstr "A dépensé"

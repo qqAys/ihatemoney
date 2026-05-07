@@ -489,6 +489,8 @@ def import_project():
             ]
             currencies = set()
             for b in bills:
+                if "bill_type" not in b:
+                    b["bill_type"] = BillType.default_value()
                 if b.get("currency", "") in ["", "XXX"]:
                     b["currency"] = g.project.default_currency
                 for a in attr:
@@ -695,6 +697,7 @@ def add_member():
     if request.method == "POST":
         if form.validate():
             member = form.save(g.project, Person())
+            db.session.add(member)
             db.session.commit()
             flash(_("%(member)s has been added", member=member.name))
             return redirect(url_for(".list_bills"))

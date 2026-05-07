@@ -23,7 +23,7 @@ def need_auth(f):
         project_id = kwargs.get("project_id").lower()
 
         # Use Basic Auth
-        if auth and project_id and auth.username.lower() == project_id:
+        if auth and project_id and auth.username is not None and auth.username.lower() == project_id:
             project = Project.query.get(auth.username.lower())
             if project and check_password_hash(project.password, auth.password):
                 # The whole project object will be passed instead of project_id
@@ -121,6 +121,7 @@ class MembersHandler(Resource):
         if form.validate():
             member = Person()
             form.save(project, member)
+            db.session.add(member)
             db.session.commit()
             return member.id, 201
         return form.errors, 400
@@ -180,6 +181,7 @@ class BillHandler(Resource):
         if form.validate():
             bill = Bill.query.get(project, bill_id)
             form.save(bill, project)
+            db.session.add(bill)
             db.session.commit()
             return bill.id, 200
         return form.errors, 400

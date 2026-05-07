@@ -5,6 +5,7 @@ from unittest.mock import MagicMock, patch
 
 from sqlalchemy import orm
 from werkzeug.security import check_password_hash
+import pytest
 
 from ihatemoney import models
 from ihatemoney.currency_convertor import CurrencyConverter
@@ -13,6 +14,10 @@ from ihatemoney.manage import (
     generate_config,
     get_project_count,
     password_hash,
+)
+from ihatemoney.utils import (
+    eval_arithmetic_expression,
+    get_owers_label,
 )
 from ihatemoney.run import load_configuration
 from ihatemoney.tests.common.ihatemoney_testcase import BaseTestCase, IhatemoneyTestCase
@@ -362,6 +367,27 @@ class TestEmailFailure(IhatemoneyTestCase):
             assert "Invite people to join this project" in resp.data.decode("utf-8")
 
 
+class TestDefaultHashMethod(IhatemoneyTestCase):
+    PASSWORD_HASH_METHOD = None
+    PASSWORD_HASH_SALT_LENGTH = None
+
+    def test_project_creation(self):
+        self.create_project("raclette")
+        resp = self.login("raclette")
+        assert (
+            "<title>I Hate Money — Account manager - raclette</title>"
+            in resp.data.decode("utf-8")
+        )
+
+    def test_project_creation_post(self):
+        self.post_project("raclette")
+        resp = self.login("raclette")
+        assert (
+            "<title>I Hate Money — Account manager - raclette</title>"
+            in resp.data.decode("utf-8")
+        )
+
+
 class TestCaptcha(IhatemoneyTestCase):
     ENABLE_CAPTCHA = True
 
@@ -469,3 +495,20 @@ class TestCurrencyConverter:
             # is mocking EVERY instance of the class method. Too bad.
             rates = CurrencyConverter.get_rates(self.converter)
         assert rates == {CurrencyConverter.no_currency: 1}
+
+
+class TestUtils:
+    def test_eval_arithmetic_expression(self):
+        assert eval_arithmetic_expression("32.3") == 32.3
+        assert eval_arithmetic_expression("-(3+2/4*5-2)") == -3.5
+        with pytest.raises(ValueError):
+            eval_arithmetic_expression("32.3/")
+        with pytest.raises(ValueError):
+            eval_arithmetic_expression("coucouc")
+
+    def test_get_owers_label(self):
+        assert get_owers_label(['A', 'B'], ['A', 'B']) == ('everyone', None)
+        assert get_owers_label(['A', 'B'], ['A', 'B', 'C']) == ('everyone', None)
+        assert get_owers_label(['A', 'B'], ['C']) == ('list', ['C'])
+        assert get_owers_label(['A', 'B', 'C'], ['A', 'B']) == ('list', ['A', 'B'])
+        assert get_owers_label(['A', 'B', 'C', 'D'], ['A', 'B']) == ('list', ['A', 'B'])
